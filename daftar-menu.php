@@ -1,3 +1,7 @@
+<?php
+  include('dbconnect.php');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,7 +25,7 @@
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"  id="menu-toggle">
                       <span class="glyphicon glyphicon-th-large" aria-hidden="true"></span>
                     </button>
-                    <a class="navbar-brand" href="#"><i class="fa fa-rocket fa-4"></i> KANTIN BENGKOK</a>        
+                    <a class="navbar-brand" href="#"><i class="fa fa-rocket fa-4"></i> KANTIN BENGKOK</a>
                 </div><!-- navbar-header-->
 
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -38,10 +42,10 @@
                     <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-user fa-stack-1x "></i></span>Nugroho Satriyanto</a>
                 </li>
                 <li>
-                    <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-dashboard fa-stack-1x "></i></span>Dashboard</a>
+                    <a href="dashboard.html"><span class="fa-stack fa-lg pull-left"><i class="fa fa-dashboard fa-stack-1x "></i></span>Dashboard</a>
                 </li>
                 <li>
-                    <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-shopping-cart fa-stack-1x "></i></span>Pemesanan</a>
+                    <a href="pemesanan.html"><span class="fa-stack fa-lg pull-left"><i class="fa fa-shopping-cart fa-stack-1x "></i></span>Pemesanan</a>
                 </li>
                 <li class="active">
                     <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-book fa-stack-1x "></i></span>Daftar Menu</a>
@@ -50,7 +54,7 @@
                     <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-file-pdf-o fa-stack-1x "></i></span>Laporan</a>
                 </li>
                 <li>
-                    <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-sign-out fa-stack-1x "></i></span>Sign Out</a>
+                    <a href="index.html"><span class="fa-stack fa-lg pull-left"><i class="fa fa-sign-out fa-stack-1x "></i></span>Sign Out</a>
                 </li>
             </ul>
         </div><!-- /#sidebar-wrapper -->
@@ -59,7 +63,19 @@
             <div class="container-fluid xyz">
                 <div class="row">
                     <div class="col-lg-12">
-                        <center>
+                      <?php
+                        $res = $db->query("select id,nama from menu;");
+                        while ($row = $res->fetch_assoc()){
+                          echo "<center><h1>$row[nama]</h1></center>";
+                          echo '<div class="row">'.
+                              '<div class="col-sm-10"></div>'.
+                              '<div class="col-sm-1"><a href="edit-menu.php?id='.$row[id].'">Edit</a></div>'.
+                              '<div class="col-sm-1"><a href="#">Delete</a></div>'.
+                          '</div>'.
+                          '<br/>';
+                        }
+                       ?>
+                        <!-- <center>
                             <h1>Menu A</h1>
                         </center>
                         <div class="row">
@@ -75,7 +91,7 @@
                             <div class="col-sm-10"></div>
                             <div class="col-sm-1"><a href="#">Edit</a></div>
                             <div class="col-sm-1"><a href="#">Delete</a></div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
